@@ -1,41 +1,76 @@
-The Greenify app aims to empower users to make positive environmental changes by offering personalized challenges and tracking eco-friendly actions. It helps users monitor habits like energy use, transportation, and recycling, while encouraging them to improve their carbon footprint. Users can track progress, earn rewards, and engage with a community focused on sustainability.
+# Greenify 🌿
 
-Motivation 
+Greenify is an eco-friendly habit tracking app that helps users make positive environmental changes through personalized activities. Track your energy usage, transportation habits, and recycling efforts while earning rewards and engaging with a community focused on sustainability.
 
-Many people want to reduce their environmental impact but aren't sure where to start or how to track progress. With a plethora of websites offering countless tips, it can be overwhelming to know where to begin. The Greenify app is designed to make sustainability accessible and actionable for everyone. 
-This application provides personalized challenges to help users adopt eco-friendly habits, such as reducing energy consumption, using greener transportation, and recycling more effectively. By tracking progress and earning rewards, users stay motivated and can see their positive impact on the planet. Greenify makes it easy for anyone to take small steps toward a more sustainable lifestyle, helping to create a larger, collective environmental impact.
+## Table of Contents
 
+- [About the Project](#about-the-project)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-User Story
+## Features
 
-AS A USER
-I WANT personalized eco-friendly challenges
-SO THAT my environmental impact is reduced and I can live more sustainably
+✅ Personalized eco-friendly activities tailored to user habits  
+✅ Carbon footprint tracking based on real-time data  
+✅ Interactive dashboard for monitoring activities  
+✅ Community engagement features
 
-Acceptance Criteria
+## Technologies Used
 
-GIVEN a user has signed up and logged into the app
-WHEN the user accesses the dashboard
-THEN they are presented with a list of personalized challenges based on their current lifestyle (e.g., energy savings, transportation choices, recycling habits).
-GIVEN a user sees a challenge they want to take
-WHEN they click on the challenge
-THEN they can view detailed instructions and track their progress.
-GIVEN a user completes a challenge
-WHEN they submit their completed task
-THEN their progress is updated, and they are rewarded with points or badges.
-GIVEN a user wishes to track their progress
-WHEN they view their profile
-THEN they can see the history of completed challenges and their overall environmental impact (ex. reduced carbon footprint).
+### Frontend
 
-Technology Used:
-Microsoft Visual Studio Code - HTML , CSS , JavaScript
-Node.js
-Express.js
-PostgreSQL (with Sequelize ORM)
-React (React Router)
-Bootstrap CSS Framework
-Render
-Github
-Postman/Insomnia:
-Carbon Footprint API
-Ecofact API
+- [React.js] (with React Router)
+- Bootstrap CSS Framework
+
+### Backend
+
+- [Node.js]
+- [Express.js]
+- [PostgreSQL](with Sequelize ORM)
+
+### APIs & Tools
+
+- Carbon Footprint API
+- Ecofact API
+- GitHub (Version Control)
+- Postman/Insomnia (API Testing)
+- Render (Deployment)
+
+## Installation
+
+1. **Clone the repository**
+2. **Install dependencies**
+3. **Set up the database:** - Install PostgreSQL, Create a .env file, and configure database credentials
+4. **Run database migrations**
+5. **Start the application**
+
+## Usage
+
+- **Sign up and log in** to start tracking your environmental impact.
+- **Add activities** to improve sustainability efforts.
+- **Track progress** in your dashboard.
+- **Complete challenges** and earn points/badges. [coming soon]
+
+## Contributing
+
+We welcome contributions! To contribute:
+
+1. **Fork the repository**
+2. **Create a new branch**
+3. **Make your changes and commit**
+4. **Push to GitHub and create a pull request**
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+
+## Contact
+
+👤 **Pral Argade** - GitHub: [@argadeps]
+👤 **Meghan McMullen** - GitHub: [@McMulle20]
+👤 **Sherard Howe** - GitHub: [@sjhowe1]
+👤 **Krystal Hardin** - GitHub: [@LilmissKryss]
