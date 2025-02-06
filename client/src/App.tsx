@@ -1,11 +1,13 @@
-import { Outlet } from 'react-router-dom';  // Outlet renders the component based on the route
+import { Outlet } from 'react-router-dom';  
+import Background from './layouts/Backgrounds'; // Import Background component
 import './App.css';
 
 function App() {
   return (
     <div>
+      <Background /> {/* Dynamically updates the background */}
       <main className="container container-fluid mt-5">
-      <Outlet /> {/* This will display the Login, SignUp, or Dashboard component */}
+        <Outlet /> {/* Displays Login, SignUp, or Dashboard */}
       </main>
     </div>
   );
