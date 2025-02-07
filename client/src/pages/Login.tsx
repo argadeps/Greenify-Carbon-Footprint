@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
+import { Link, useNavigate } from 'react-router-dom'; // Import Link for navigation
 import "../index.css";
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    navigate('/Home');  // Navigate to the Home page
     // Handle login logic, validate credentials
 
 /*    try {
@@ -55,7 +57,7 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Sign In</button>
+         <button type="submit">Sign In</button>  {/* When clicked, form is submitted and user is navigated */}
       </form>
       <div className="signup-link">
         <p>Don't have an account? <Link to="/signup">Sign up</Link></p> {/* Link to signup page */}

@@ -7,7 +7,7 @@ function App() {
     <div>
       <Background /> {/* Dynamically updates the background */}
       <main className="container container-fluid mt-5">
-        <Outlet /> {/* Displays Login, SignUp, or Dashboard */}
+        <Outlet /> {/* Displays Login, SignUp, or Home */}
       </main>
     </div>
   );

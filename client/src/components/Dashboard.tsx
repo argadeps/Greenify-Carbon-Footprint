@@ -1,5 +1,5 @@
 // src/components/Dashboard.js
-import /*React,*/ { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
  
 
 const Dashboard = () => {
@@ -12,7 +12,10 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h1>Welcome Back, {username}</h1>
+      <div id="greeting-container">
+        <h1 id="greeting">Welcome Back, {username}!</h1>
+        <hr id="line" />
+      </div>
       {/* Other dashboard content */}
     </div>
   );

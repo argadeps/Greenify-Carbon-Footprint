@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Import bootstrap for global st
 import App from './App'; // Main layout component
 import Login from './pages/Login'; // Login page component
 import SignUp from './pages/SignUp'; // Sign-up page component
-//import Home from './pages/Home'; // HomePage page component
+import Home from './pages/Home'; // HomePage page component
 import ErrorPage from './pages/ErrorPage'; // Fallback error page component
 
 // Define the router
