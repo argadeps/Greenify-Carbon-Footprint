@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Import bootstrap for global st
 import App from './App'; // Main layout component
 import Login from './pages/Login'; // Login page component
 import SignUp from './pages/SignUp'; // Sign-up page component
-//import Dashboard from './components/Dashboard'; // Dashboard page component
+//import Home from './pages/Home'; // HomePage page component
 import ErrorPage from './pages/ErrorPage'; // Fallback error page component
 
 // Define the router
@@ -25,9 +25,9 @@ const router = createBrowserRouter([
         element: <SignUp />, // This will load the SignUp component
       },
       /*{
-        path: '/dashboard', // Route for dashboard page
-        element: <Dashboard />,
-      }, */
+        path: '/Home', // Route for Home page
+        element: <Home />,
+      },*/
     ]
   }
 ]);

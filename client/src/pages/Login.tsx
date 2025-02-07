@@ -2,22 +2,21 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom'; // Import Link for navigation
 import "../index.css";
 
-
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Handle login logic, validate credentials
 
 /*    try {
-      const response = await fetch('/api/login', { // Make sure this URL matches your server route
+      const response = await fetch('/api/login', { // Make sure this URL matches server route
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password }), //Wheen 
       });
 
       const data = await response.json();
@@ -26,10 +25,10 @@ function Login() {
         // Store the JWT token in localStorage or sessionStorage
         localStorage.setItem('token', data.token);
 
-        // Redirect to the dashboard or another page
+        // Redirect to the dashboard
         navigate('/dashboard');
       } else {
-        setError(data.message); // Show error message if credentials are invalid
+        setError(data.message || "Please create an account."); // Show error message if credentials are invalid
       }
     } catch (err) {
       setError('Server error. Please try again later.');

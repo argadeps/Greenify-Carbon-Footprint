@@ -185,6 +185,33 @@ body {
   color: red;
   font-weight: bold;
 }
+
+@media (max-width: 480px) {
+  .login-container,
+  .signup-container {
+    width: 90%; /* Makes it take 90% of the screen width */
+    padding: 30px; /* Reduce padding for smaller screens */
+  }
+
+  .login-container h1,
+  .signup-container h1 {
+    font-size: 32px; /* Reduce font size for better fit */
+  }
+
+  .login-container h2,
+  .signup-container h2 {
+    font-size: 16px; /* Make subheading smaller */
+  }
+
+  .login-container input,
+  .signup-container input,
+  .login-container button,
+  .signup-container button {
+    font-size: 14px; /* Reduce button and input text size */
+  }
+}
+
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -318,3 +345,9 @@ button {
   text-decoration: underline;
 }
 */
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+}
