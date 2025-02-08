@@ -1,21 +1,33 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // Import Link for navigation
+import { AuthContext } from '../context/authContext'; // Import AuthContext
 import "../index.css";
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState<string>(''); // State for error message
   const navigate = useNavigate();
+
+    // Accessing AuthContext and ensuring it's not null
+    const authContext = useContext(AuthContext);
+
+    // If the AuthContext is not available, throw an error (ensure context is available)
+    if (!authContext) {
+      throw new Error('AuthContext is not available');
+    }
+  
+    const { login } = authContext; // Now use the login function from the context directly
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/Home');  // Navigate to the Home page
+    //navigate('/Home');  // Navigate to the Home page
     // Handle login logic, validate credentials
     /* Frontend sends a POST request to /api/user with the username and password.
        Backend verifies credentials.
        If successful, sends back a JWT token. */
 
-/*     try {
+     try {
       const response = await fetch('/api/user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -23,15 +35,21 @@ function Login() {
       });
 
       const data = await response.json();
+      
       if (response.ok) {
-        localStorage.setItem('token', data.token);
-        navigate('/dashboard');
+        // If authentication is successful, store the token using the AuthContext login method
+        login(data.token); // Pass the received token to the login function from AuthContext
+        navigate('/home');  // Navigate to the Home page
       } else {
-        setError(data.message);
+        // Handle any errors, such as invalid credentials
+        setError(data.message || 'Invalid login credentials. Either sign up or try again.'); // Set the error message
+        console.error(data.message); // Or set error state to show message
       }
     } catch (err) {
-  };*/ //to be edited to take in Postgres usernames.
-}; 
+      console.error('Error during login:', err); //To add a ui error.
+      setError('An error occurred during login. Please try again later.');
+    }
+  }; //TO BE edited
 
   return (
     <div className="login-container">
@@ -53,6 +71,7 @@ function Login() {
           required
         />
          <button type="submit">Sign In</button>  {/* When clicked, form is submitted and user is navigated */}
+         {error && <p className="error-message">{error}</p>} {/* Display error message */}
       </form>
       <div className="signup-link">
         <p>Don't have an account? <Link to="/signup">Sign up</Link></p> {/* Link to signup page */}

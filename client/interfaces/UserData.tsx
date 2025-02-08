@@ -2,6 +2,7 @@ interface UserData {
     id: number | null;
     username: string | null;
     email: string | null;
+    //createdAt: string;?
   }
   
   export default UserData;
