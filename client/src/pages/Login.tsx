@@ -12,29 +12,21 @@ function Login() {
     navigate('/Home');  // Navigate to the Home page
     // Handle login logic, validate credentials
 
-/*    try {
-      const response = await fetch('/api/login', { // Make sure this URL matches server route
+/*     try {
+      const response = await fetch('/api/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }), //Wheen 
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
       });
 
       const data = await response.json();
-
       if (response.ok) {
-        // Store the JWT token in localStorage or sessionStorage
         localStorage.setItem('token', data.token);
-
-        // Redirect to the dashboard
         navigate('/dashboard');
       } else {
-        setError(data.message || "Please create an account."); // Show error message if credentials are invalid
+        setError(data.message);
       }
     } catch (err) {
-      setError('Server error. Please try again later.');
-    }
   };*/ //to be edited to take in Postgres usernames.
 }; 
 
