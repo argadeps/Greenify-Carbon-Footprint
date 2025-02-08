@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom'; // Import Link for navigation
+import { useNavigate } from 'react-router-dom';
 import "../index.css";
 
 
@@ -8,13 +9,22 @@ function SignUp() {
   const [email, setEmail] = useState(''); 
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  if (!username || !email || !password) {
+    setError('Please fill in all fields');
+    return;
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic, validate credentials
-
+    // Handle login logic, validate credentials Sending a POST reqest to api/user
+    /*Frontend sends a POST request to /api/user with the username, email, and password.
+      Backend checks if the username/email exists and, if not, stores the new user.
+      Sends a success or error message */
+      
 /*    try {
-      const response = await fetch('/api/signup', { //  Make sure this URL matches server route
+      const response = await fetch('/api/user', { //  Make sure this URL matches server route
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,8 +40,8 @@ function SignUp() {
           localStorage.setItem('token', data.token);
         }
         
-        // Redirect to the dashboard or login page
-        navigate('/dashboard');
+        // Redirect to the Home page  
+        navigate('/Home');
       } else {
         setError(data.message || 'Failed to sign up. Please try again.');
       }

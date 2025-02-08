@@ -11,9 +11,12 @@ function Login() {
     e.preventDefault();
     navigate('/Home');  // Navigate to the Home page
     // Handle login logic, validate credentials
+    /* Frontend sends a POST request to /api/user with the username and password.
+       Backend verifies credentials.
+       If successful, sends back a JWT token. */
 
 /*     try {
-      const response = await fetch('/api/login', {
+      const response = await fetch('/api/user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),

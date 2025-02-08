@@ -2,13 +2,26 @@
 import { useEffect, useState } from 'react';
  
 
-const Dashboard = () => {
+const Dashboard = () {
   const [username, setUsername] = useState('');
 
   useEffect(() => {
-    // Mock fetching user data
-    setUsername('John Doe');
-  }, []);
+    // Fetch user data from backend
+    const fetchUserData = async () => {
+      const token = localStorage.getItem('token');
+      const response = await fetch('/api/dashboard', {
+        headers: { 'Authorization': `Bearer ${token}` },
+        
+        if (response.ok) {
+          const data = await response.json();
+          setUserData(data);
+        } else {
+          alert('Unable to fetch user data');
+        }
+      };
+  
+      fetchUserData();
+    }, []);
 
   return (
     <div>
