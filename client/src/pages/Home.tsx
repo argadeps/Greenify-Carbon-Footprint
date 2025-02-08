@@ -12,7 +12,7 @@ const Home = () => {
         <Navbar />
         <Dashboard />
         {/* 
-        <Dashboard />
+      
         <CarbonForm />*/}
       </div>
     );
