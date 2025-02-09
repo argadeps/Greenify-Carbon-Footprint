@@ -47,7 +47,7 @@ function SignUp() {
       if (response.ok) {
         // If signup is successful, store the token using the AuthContext login method
         if (data.token) {
-          login(data.token); // Pass the received token to the login function from AuthContext
+          login(data.userData, data.token); // Pass the received token to the login function from AuthContext
         }
 
         // Redirect to Home page after successful sign up

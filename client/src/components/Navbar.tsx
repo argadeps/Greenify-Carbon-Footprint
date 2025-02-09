@@ -19,7 +19,7 @@ const Navbar = () => {
 
       {/* Exit logo on the right */}
       <div className="d-flex justify-content-end">
-        <Link to="/" className="text-white">
+        <Link to="/login" className="text-white">
           <img 
             id="exit-logo" 
             src="/assets/images/exitlogo.png" 

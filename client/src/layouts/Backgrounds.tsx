@@ -6,13 +6,14 @@ function Background() {
 
   let backgroundStyle = {};
 
-  if (location.pathname === '/login') {
+  if (location.pathname === '/') {
     // Login Page Background
     backgroundStyle = { backgroundImage: "url('/assets/images/wallpaper.jpg')" };
   } else if (location.pathname === '/signup') {
     // Sign-Up Page Background
     backgroundStyle = { backgroundImage: "url('/assets/images/bgcolor.png')" };
-  }
+  } else if (location.pathname === '/login')
+    backgroundStyle = { backgroundImage: "url('/assets/images/wallpaper.jpg')" };
 
   return <div className="background-container" style={backgroundStyle}></div>;
 }

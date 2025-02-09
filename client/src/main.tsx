@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css'; // Import global CSS
+import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import bootstrap for global styling
 
 import App from './App'; // Main layout component
@@ -17,7 +18,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />, // Error page for invalid routes
     children: [
       {
-        path: 'login', // Explicit route for login
+        path: '/', // Explicit route for login
+        element: <Login />,
+      },
+      {
+        path: '/login', // Explicit route for login
         element: <Login />,
       },
       {
@@ -25,7 +30,7 @@ const router = createBrowserRouter([
         element: <SignUp />, // This will load the SignUp component
       },
       {
-        path: '/Home', // Route for Home page
+        path: '/home', // Route for Home page
         element: <Home />,
       },
     ]
