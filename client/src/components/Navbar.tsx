@@ -1,10 +1,16 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../context/authContext';
 
 const Navbar = () => {
+  const authContext = useContext(AuthContext);
+  if (!authContext) return null;
+
+  const { logout } = authContext;
+
   return (
     <nav 
-      className="d-flex justify-content-between align-items-center position-fixed w-100" 
-      style={{ top: 0, left: 0, backgroundColor: '#86A37C', padding: '10px 20px' }}
+      id= "navbar" className="d-flex justify-content-between align-items-center position-fixed w-100" 
     >
       {/* Logo on the left, centered vertically */}
       <div className="d-flex justify-content-start">
@@ -14,7 +20,13 @@ const Navbar = () => {
       {/* Exit logo on the right */}
       <div className="d-flex justify-content-end">
         <Link to="/" className="text-white">
-          <img id="exit-logo" src="/assets/images/exitlogo.png" alt="Exit Logo" style={{ width: '90px', height: 'auto' }} />
+          <img 
+            id="exit-logo" 
+            src="/assets/images/exitlogo.png" 
+            alt="Exit Logo" 
+            style={{ width: '90px', height: 'auto', cursor: 'pointer' }} 
+            onClick={logout}  // This makes the image clickable and triggers the logout
+          />
         </Link>
       </div>
     </nav>

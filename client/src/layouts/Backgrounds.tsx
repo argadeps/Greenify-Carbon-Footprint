@@ -6,7 +6,7 @@ function Background() {
 
   let backgroundStyle = {};
 
-  if (location.pathname === '/') {
+  if (location.pathname === '/login') {
     // Login Page Background
     backgroundStyle = { backgroundImage: "url('/assets/images/wallpaper.jpg')" };
   } else if (location.pathname === '/signup') {

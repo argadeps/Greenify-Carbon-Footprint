@@ -17,17 +17,17 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />, // Error page for invalid routes
     children: [
       {
-        index: true, // Default route points to Login page
+        path: 'login', // Explicit route for login
         element: <Login />,
       },
       {
         path: '/signup', // Route for sign-up page
         element: <SignUp />, // This will load the SignUp component
       },
-      /* {
+      {
         path: '/Home', // Route for Home page
         element: <Home />,
-      }, */
+      },
     ]
   }
 ]);

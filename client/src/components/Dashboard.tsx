@@ -1,36 +1,44 @@
+import { useEffect, useState, useContext } from 'react';
+import { AuthContext } from '../context/authContext';
+import "../index.css";
+const Dashboard = () => {
+  const [username, setUsername] = useState('John Doe'); // Set a temporary username
+  const authContext = useContext(AuthContext);
 
-import { useEffect, useState } from 'react';
-import { AuthContext } from '../context/AuthContext';
-const { token, logout } = useContext(AuthContext); // Use AuthContext to get token and logout function
+  // Early return if authContext is unavailable (e.g., during initial render)
+  if (!authContext) return <p>Loading...</p>;
 
-const Dashboard = () {
-  const [username, setUsername] = useState('');
+  const { user } = authContext;
 
   useEffect(() => {
-    // Fetch user data from backend
     const fetchUserData = async () => {
-      const token = localStorage.getItem('token');
-      const response = await fetch('/api/dashboard', {
-        headers: { 'Authorization': `Bearer ${token}` },
-        
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch('/api/dashboard', {
+          headers: { 'Authorization': `Bearer ${token}` },
+        });
+
         if (response.ok) {
           const data = await response.json();
-          setUserData(data);
+          setUsername(data.username);
         } else {
-          alert('Unable to fetch user data');
+          console.error('Unable to fetch user data');
         }
-      };
-  
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    // Only fetch user data if the user is authenticated
+    if (user) {
       fetchUserData();
-    }, []);
+    }
+  }, [user]); // Run the effect when the user changes
 
   return (
-    <div>
-      <div id="greeting-container">
-        <h1 id="greeting">Welcome Back, {username}!</h1>
-        <hr id="line" />
-      </div>
-      {/* Other dashboard content */}
+    <div id= "greeting">
+      <h1>Welcome Back, {username}!</h1>
+      {/* Add any other dashboard content here */}
     </div>
   );
 };

@@ -21,46 +21,46 @@ const CarbonForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Submitting data:', formData);
-    // API call to Climatiq would go here
+    // API call to Climatiq would go here 
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-6 bg-white rounded-lg shadow-md max-w-md mx-auto">
+    <form onSubmit={handleSubmit}id="carbon-form" className="p-4 bg-light rounded shadow-sm max-w-md mx-auto">
       {/* Location */}
-      <div className="mb-4">
-        <label className="block text-gray-700">Location (Zip Code):</label>
+      <div className="mb-3">
+        <label className="form-label">Location (Zip Code):</label>
         <input
           type="text"
           name="location"
           value={formData.location}
           onChange={handleChange}
           required
-          className="w-full p-2 border rounded"
+          className="form-control"
         />
       </div>
       
       {/* Electricity */}
-      <div className="mb-4">
-        <label className="block text-gray-700">Monthly Electricity Bill ($):</label>
+      <div className="mb-3">
+        <label className="form-label">Monthly Electricity Bill ($):</label>
         <input
           type="number"
           name="electricity"
           value={formData.electricity}
           onChange={handleChange}
           required
-          className="w-full p-2 border rounded"
+          className="form-control"
         />
       </div>
       
       {/* Transportation */}
-      <div className="mb-4">
-        <label className="block text-gray-700">Transportation Type:</label>
+      <div className="mb-3">
+        <label className="form-label">Transportation Type:</label>
         <select
           name="transportation"
           value={formData.transportation}
           onChange={handleChange}
           required
-          className="w-full p-2 border rounded"
+          className="form-select"
         >
           <option value="car">Car</option>
           <option value="bus">Bus</option>
@@ -71,13 +71,13 @@ const CarbonForm: React.FC = () => {
       
       {/* Car Type (Only shows if car is selected) */}
       {formData.transportation === 'car' && (
-        <div className="mb-4">
-          <label className="block text-gray-700">Car Fuel Type:</label>
+        <div className="mb-3">
+          <label className="form-label">Car Fuel Type:</label>
           <select
             name="carType"
             value={formData.carType}
             onChange={handleChange}
-            className="w-full p-2 border rounded"
+            className="form-select"
           >
             <option value="electric">Electric</option>
             <option value="hybrid">Hybrid</option>
@@ -88,14 +88,14 @@ const CarbonForm: React.FC = () => {
       )}
       
       {/* Diet */}
-      <div className="mb-4">
-        <label className="block text-gray-700">Food Diet:</label>
+      <div className="mb-3">
+        <label className="form-label">Food Diet:</label>
         <select
           name="diet"
           value={formData.diet}
           onChange={handleChange}
           required
-          className="w-full p-2 border rounded"
+          className="form-select"
         >
           <option value="meat_every_meal">Meat in every meal 🍖</option>
           <option value="vegetarian">Vegetarian 🥗</option>
@@ -104,8 +104,8 @@ const CarbonForm: React.FC = () => {
       </div>
       
       {/* Water Usage */}
-      <div className="mb-4">
-        <label className="block text-gray-700">Water Usage (% of Average):</label>
+      <div className="mb-3">
+        <label className="form-label">Water Usage (% of Average):</label>
         <input
           type="range"
           name="waterUsage"
@@ -113,12 +113,12 @@ const CarbonForm: React.FC = () => {
           max="100"
           value={formData.waterUsage}
           onChange={handleChange}
-          className="w-full"
+          className="form-range"
         />
-        <span className="block text-center mt-2">{formData.waterUsage}%</span>
+        <span className="d-block text-center mt-2">{formData.waterUsage}%</span>
       </div>
       
-      <button type="submit" className="w-full bg-green-500 text-white p-2 rounded">Log Entry</button>
+      <button type="submit" className="btn btn-success w-100">Log Entry</button>
     </form>
   );
 };

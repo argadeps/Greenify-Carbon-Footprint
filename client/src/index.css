@@ -185,6 +185,31 @@ body {
   color: red;
   font-weight: bold;
 }
+#navbar {
+  top: 0;
+  left: 0;
+  background-color: #86A37C;
+  padding: 1px 20px;
+  z-index: 1000; /* Ensure it's on top of other elements */
+}
+#logo {
+  transform: scale(1) translateX(20px);
+  
+}
+
+#exit-logo {
+  transform: scale(1) translateX(-20px);
+}
+
+
+#carbon-form {
+  transform: scale(0.85); /* Scale down the form to fit it on the screen */
+  transform-origin: top center; /* Ensure scaling is from the top */
+  margin: 20px auto; /* Center the form horizontally */
+  max-height: 80vh; /* Ensure the form doesn't take up the whole screen */
+  overflow-y: auto; /* Allow vertical scrolling if content exceeds the max height */
+  padding: 20px; /* Add some padding for aesthetics */
+}
 
 
 @media (max-width: 480px) {
