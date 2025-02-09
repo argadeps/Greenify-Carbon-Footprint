@@ -1,6 +1,7 @@
-// src/components/Dashboard.js
+
 import { useEffect, useState } from 'react';
- 
+import { AuthContext } from '../context/AuthContext';
+const { token, logout } = useContext(AuthContext); // Use AuthContext to get token and logout function
 
 const Dashboard = () {
   const [username, setUsername] = useState('');

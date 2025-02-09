@@ -21,6 +21,12 @@ function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(''); // Reset the error on new submission
+    navigate('/Home');  // Navigate to the Home page
+   /* if (!username || !password) {
+      setError("Please fill in the form");
+      return;
+    } */ 
     //navigate('/Home');  // Navigate to the Home page
     // Handle login logic, validate credentials
     /* Frontend sends a POST request to /api/user with the username and password.
@@ -87,4 +93,18 @@ useState stores the entered values.
 Backend (Node.js/Express):
 On form submission, the frontend sends a POST request to the server with the username and password.
 The backend queries PostgreSQL to check if the credentials are valid.
-If valid, a response (like a JWT) is sent back. */
+If valid, a response (like a JWT) is sent back.
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+could add 
+ const [loading, setLoading] = useState(false);)
+ setLoading(true); // Show loading spinner
+ } finally {
+ setLoading(false); // Hide loading spinner
+ disabled={loading}*/

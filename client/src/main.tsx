@@ -24,10 +24,10 @@ const router = createBrowserRouter([
         path: '/signup', // Route for sign-up page
         element: <SignUp />, // This will load the SignUp component
       },
-      {
+      /* {
         path: '/Home', // Route for Home page
         element: <Home />,
-      },
+      }, */
     ]
   }
 ]);
