@@ -7,7 +7,14 @@ import Dashboard from '../components/Dashboard';
 import "../index.css";
 
 const Home = () => {
-  const { user } = useContext(AuthContext); // Check if user is logged in
+  const authContext = useContext(AuthContext);
+
+  // Check if authContext is null, and provide type assertion that it's not null here
+  if (!authContext) {
+    throw new Error('AuthContext is not available');
+  }
+
+  const { user } = authContext; // Destructure user safely, no need to call useContext again
 
   return (
     <div>

@@ -44,7 +44,7 @@ function Login() {
       
       if (response.ok) {
         // If authentication is successful, store the token using the AuthContext login method
-        login(data.token); // Pass the received token to the login function from AuthContext
+        login(data.userData,data.token); // Pass the received token to the login function from AuthContext
         navigate('/home');  // Navigate to the Home page
       } else {
         // Handle any errors, such as invalid credentials
