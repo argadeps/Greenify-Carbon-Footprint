@@ -36,8 +36,8 @@ CREATE TABLE Activities (
   carbon_impact DECIMAL(10,2),
   water_impact DECIMAL(10,2),
   waste_impact DECIMAL(10,2),
-  date DATE,
-  description TEXT
+  date DATE NOT NULL,
+  description TEXT NOT NULL
 );
 
 CREATE TABLE CarbonFootprints (
