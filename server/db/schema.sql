@@ -10,7 +10,6 @@ CREATE TABLE Users (
   location VARCHAR(255),
   eco_score INTEGER DEFAULT 0,
   last_login TIMESTAMP,
-  eco_score INTEGER,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
