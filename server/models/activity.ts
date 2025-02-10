@@ -1,4 +1,6 @@
 import { DataTypes, Sequelize, Model, Optional, ForeignKey } from 'sequelize';
+import { User } from './user';
+import { EmissionFactor } from './emissionFactor';
 
 interface ActivityAttributes {
     id: number;
@@ -69,7 +71,7 @@ export function ActivityFactory(sequelize: Sequelize): typeof Activity {
                 allowNull: false
             },
             description: {
-                type: DataTypes.STRING,
+                type: DataTypes.TEXT,
                 allowNull: false
             }
         },
@@ -79,5 +81,11 @@ export function ActivityFactory(sequelize: Sequelize): typeof Activity {
             freezeTableName: true
         }
     );
+    
+    Activity.belongsTo(User, {foreignKey: 'user_id'});
+    User.hasMany(Activity,{foreignKey: 'user_id'});
+    Activity.belongsTo(EmissionFactor,{foreignKey: 'display_name'});
+    EmissionFactor.hasMany(Activity, {foreignKey: 'display_name'})
+
     return Activity;
 }

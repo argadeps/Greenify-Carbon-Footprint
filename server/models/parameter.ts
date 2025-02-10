@@ -1,4 +1,5 @@
 import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
+import { EmissionFactor } from './emissionFactor';
 
 interface ParameterAttributes {
     id: number;
@@ -37,6 +38,9 @@ export function ParameterFactory(sequelize: Sequelize): typeof Parameter {
             freezeTableName: true
         }
     );
+    
+    Parameter.belongsTo(EmissionFactor, {foreignKey: 'display_name'});
+    EmissionFactor.hasMany(Parameter, {foreignKey: 'display_name'});
 
     return Parameter;
 }

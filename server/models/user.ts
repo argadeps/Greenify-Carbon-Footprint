@@ -59,6 +59,7 @@ export function UserFactory(sequelize: Sequelize): typeof User {
             type: DataTypes.NUMBER,
             allowNull: false
           }
+
       },
       {
         tableName: 'users',  // Name of the table in PostgreSQL
