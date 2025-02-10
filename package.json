@@ -19,6 +19,16 @@
   "homepage": "https://github.com/argadeps/Greenify#readme",
   "description": "",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/sequelize": "^4.28.20",
     "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "sequelize": "^6.37.3",
+    "pg": "^8.11.5",
+    "express": "^4.19.2",
+    "dotenv": "^16.4.5",
+    "jsonwebtoken": "^9.0.2"
   }
 }
