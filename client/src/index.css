@@ -1,32 +1,31 @@
-/* Login.css*/ 
+/* Login.css*/
 body {
-  background-image: url('/assets/images/wallpaper.jpg'); 
-  background-size: cover;  
-  background-position: center center;  
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  font-family: 'Martel Sans', sans-serif;
+  font-family: "Martel Sans", sans-serif;
   margin: 0;
 }
 
 .login-container {
-
-  display: fit;
-  flex-direction: column;
-  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50.5%, -10%);
+  width: 100%;
+  max-width: 400px;
   background: rgba(255, 255, 255, 0.9);
   padding: 50px;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  width: 400px;
+  position: relative;
 }
 
 .login-container h1 {
   font-weight: 800;
   font-size: 48px;
-  color: #86A37C;
+  color: #86a37c;
   text-align: center;
   margin-bottom: 10px;
   border-bottom: 2px solid rgba(39, 43, 46, 0.5);
@@ -51,19 +50,19 @@ body {
 .login-container input {
   width: 100%;
   padding: 12px;
-  border: 1px solid #86A37C;
+  border: 1px solid #86a37c;
   border-radius: 6px;
   font-size: 16px;
 }
 .login-container input:focus {
   outline: none; /* Removes the default outline */
-  border: 2px solid #86A37C; /* Customize the border color on focus */
+  border: 2px solid #86a37c; /* Customize the border color on focus */
 }
 
 .login-container button {
   width: 100%;
   padding: 12px;
-  background: #86A37C;
+  background: #86a37c;
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -92,7 +91,7 @@ body {
 }
 
 .signup-link a {
-  color: #86A37C;
+  color: #86a37c;
   text-decoration: none;
   font-weight: 600;
 }
@@ -103,21 +102,22 @@ body {
 
 /*sign up*/
 .signup-container {
-
-  display: fit;
-  flex-direction: column;
-  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50.5%, -50%);
+  width: 100%;
+  max-width: 400px;
   background: rgba(255, 255, 255, 0.9);
   padding: 50px;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  width: 400px;
 }
 
 .signup-container h1 {
   font-weight: 800;
   font-size: 48px;
-  color: #86A37C;
+  color: #86a37c;
   text-align: center;
   margin-bottom: 10px;
   border-bottom: 2px solid rgba(39, 43, 46, 0.5);
@@ -142,19 +142,19 @@ body {
 .signup-container input {
   width: 100%;
   padding: 12px;
-  border: 1px solid #86A37C;
+  border: 1px solid #86a37c;
   border-radius: 6px;
   font-size: 16px;
 }
 .signup-container input:focus {
   outline: none; /* Removes the default outline */
-  border: 2px solid #86A37C; /* Customize the border color on focus */
+  border: 2px solid #86a37c; /* Customize the border color on focus */
 }
 
 .signup-container button {
   width: 100%;
   padding: 12px;
-  background: #86A37C;
+  background: #86a37c;
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -175,13 +175,70 @@ body {
 }
 
 .login-link a {
-  color: #86A37C;
+  color: #86a37c;
   text-decoration: none;
   font-weight: 600;
 }
 
 .login-link a:hover {
   text-decoration: underline;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+#navbar {
+  top: 0;
+  left: 0;
+  background-color: #86a37c;
+  padding: 1px 20px;
+  z-index: 1000; /* Ensure it's on top of other elements */
+}
+#logo {
+  transform: scale(1) translateX(20px);
+}
+
+#exit-logo {
+  transform: scale(1) translateX(-20px);
+}
+
+#carbon-form {
+  transform: scale(0.85); /* Scale down the form to fit it on the screen */
+  transform-origin: top center; /* Ensure scaling is from the top */
+  margin: 20px auto; /* Center the form horizontally */
+  max-height: 80vh; /* Ensure the form doesn't take up the whole screen */
+  overflow-y: auto; /* Allow vertical scrolling if content exceeds the max height */
+  padding: 20px; /* Add some padding for aesthetics */
+}
+
+#log-entry {
+  background: #3e5e3c;
+}
+
+@media (max-width: 480px) {
+  .login-container,
+  .signup-container {
+    width: 90%; /* Makes it take 90% of the screen width */
+    padding: 30px; /* Reduce padding for smaller screens */
+  }
+
+  .login-container h1,
+  .signup-container h1 {
+    font-size: 32px; /* Reduce font size for better fit */
+  }
+
+  .login-container h2,
+  .signup-container h2 {
+    font-size: 16px; /* Make subheading smaller */
+  }
+
+  .login-container input,
+  .signup-container input,
+  .login-container button,
+  .signup-container button {
+    font-size: 14px; /* Reduce button and input text size */
+  }
 }
 
 /* :root {
@@ -317,3 +374,9 @@ button {
   text-decoration: underline;
 }
 */
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+}

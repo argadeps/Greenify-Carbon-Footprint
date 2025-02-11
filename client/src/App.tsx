@@ -1,12 +1,20 @@
-import { Outlet } from 'react-router-dom';  // Outlet renders the component based on the route
-import './App.css';
+import { Outlet } from "react-router-dom";
+import Background from "./layouts/Backgrounds"; // Import Background component
+import "./index.css";
+import "./App.css";
+import { AuthProvider } from "./context/authContext";
 
 function App() {
   return (
     <div>
-      <main className="container container-fluid mt-5">
-      <Outlet /> {/* This will display the Login, SignUp, or Dashboard component */}
-      </main>
+      <AuthProvider>
+        {/* Wrap the layout and routes with <AuthProvider> */}
+        <Background /> {/* Dynamically updates the background */}
+        <main className="container container-fluid mt-5">
+          <Outlet /> {/* Displays Login, SignUp, or Home */}
+        </main>
+      </AuthProvider>
+      {/* Wrap the layout and routes with <AuthProvider> */}
     </div>
   );
 }
