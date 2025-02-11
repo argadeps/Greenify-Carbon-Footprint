@@ -27,7 +27,7 @@ const CarbonForm: React.FC = () => {
       console.log("Submitting data:", formData);
 
       // Prepare form data for API
-      const carbonFormData: /*CarbonFormData*/ = {
+      const carbonFormData: CarbonFormData = {
         vehicle: {
           type: formData.carType as "electric" | "hybrid" | "gas",
           distance: Number(formData.distance),
@@ -35,7 +35,7 @@ const CarbonForm: React.FC = () => {
       };
 
       // Fetch CO₂ impact from API (You need to define calculateCarbonImpact and CarbonFormData)
-      const data = await /*calculateCarbonImpact*/(carbonFormData);
+      const data = await calculateCarbonImpact(carbonFormData);
       setCarbonResults(data); // Store results
       setError(null);
       setShowForm(false);
