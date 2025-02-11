@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', async (_req: Request, res: Response) => {
     try {
       const users = await EmissionFactor.findAll({
-        attributes: { exclude: ['password_hash'] }
+        attributes: { exclude: ['created_at'] }
       });
       res.json(users);
     } catch (error: any) {
@@ -16,16 +16,14 @@ router.get('/', async (_req: Request, res: Response) => {
     }
   });
 
-  router.get('/:id', async (req: Request, res: Response) => {
-    const { id } = req.params;
+  router.get('/:displayName', async (req: Request, res: Response) => {
+    const { displayName } = req.params;
     try {
-      const user = await EmissionFactor.findByPk(id, {
-        attributes: { exclude: ['password_hash'] }
-      });
+      const user = await EmissionFactor.findOne({ where: { display_name: displayName }, attributes: { exclude: ['created_at'] } });
       if (user) {
         res.json(user);
       } else {
-        res.status(404).json({ message: 'User not found' });
+        res.status(404).json({ message: 'Factor not found' });
       }
     } catch (error: any) {
       res.status(500).json({ message: error.message });
@@ -35,10 +33,11 @@ router.get('/', async (_req: Request, res: Response) => {
   router.post('/', async (_req: Request, res: Response) => {
     const {activity_id, category, display_name, source, region, year, source_lca_activity, data_version} = _req.body;
     try {
-      const users = await EmissionFactor.findAll({
-        attributes: { exclude: ['password_hash'] }
+      const activity = await EmissionFactor.create({
+          activity_id, category, display_name, source, region, year, source_lca_activity, data_version,
+          created_at: Date.now()
       });
-      res.json(users);
+      res.json(activity);
     } catch (error: any) {
       res.status(500).json({ message: error.message });
     }
