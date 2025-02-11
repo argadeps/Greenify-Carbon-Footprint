@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
-
+import React, { useState } from "react";
+// Import the calculateCarbonImpact function and CarbonFormData from your API file
+// import { calculateCarbonImpact, CarbonFormData } from "./api/carbonApi";
+import '../index.css'; 
 const CarbonForm: React.FC = () => {
   const [formData, setFormData] = useState({
-    location: '',
-    electricity: 0,
-    transportation: 'car',
-    carType: 'electric',
-    diet: 'meat_every_meal',
-    waterUsage: 50,
+    transportation: "car",
+    carType: "electric",
+    distance: 0,
   });
 
-  const [showForm, setShowForm] = useState(false); // State to toggle form visibility
+  const [showForm, setShowForm] = useState(false); // Toggle form visibility
+  const [carbonResults, setCarbonResults] = useState<any[]>([]); // Store CO₂ impact
+  const [error, setError] = useState<string | null>(null); // Store errors
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -22,81 +23,56 @@ const CarbonForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Submitting data:', formData);
-    // API call to Climatiq would go here
-    setShowForm(false); // Close the form after submission
-  };
+    try {
+      console.log("Submitting data:", formData);
 
-  const handleButtonClick = () => {
-    setShowForm(true); // Open the form when "Log Entry" button is clicked
-  };
+      // Prepare form data for API
+      const carbonFormData: /*CarbonFormData*/ = {
+        vehicle: {
+          type: formData.carType as "electric" | "hybrid" | "gas",
+          distance: Number(formData.distance),
+        },
+      };
 
-  const handleCancel = () => {
-    setShowForm(false); // Close the form when "Cancel" is clicked
+      // Fetch CO₂ impact from API (You need to define calculateCarbonImpact and CarbonFormData)
+      const data = await /*calculateCarbonImpact*/(carbonFormData);
+      setCarbonResults(data); // Store results
+      setError(null);
+      setShowForm(false);
+    } catch (error) {
+      setError("An error occurred while calculating the carbon impact.");
+      console.error("Error:", error);
+    }
   };
 
   return (
-    <div>
+    <div className="form-container">
       {/* Log Entry Button */}
       {!showForm && (
-        <button
-          onClick={handleButtonClick}
-          id="log-entry"
-          className="btn btn-success w-100"
-        >
+        <button onClick={() => setShowForm(true)} className="btn btn-success w-100">
           Log Entry
         </button>
       )}
 
-      {/* Form that pops up when the button is clicked */}
+      {/* Form */}
       {showForm && (
-        <form onSubmit={handleSubmit} id="carbon-form" className="p-4 bg-light rounded shadow-sm max-w-md mx-auto">
-          {/* Location */}
-          <div className="mb-3">
-            <label className="form-label">Location (Zip Code):</label>
-            <input
-              type="text"
-              name="location"
-              value={formData.location}
-              onChange={handleChange}
-              required
-              className="form-control"
-            />
-          </div>
-
-          {/* Electricity */}
-          <div className="mb-3">
-            <label className="form-label">Monthly Electricity Bill ($):</label>
-            <input
-              type="number"
-              name="electricity"
-              value={formData.electricity}
-              onChange={handleChange}
-              required
-              className="form-control"
-            />
-          </div>
-
-          {/* Transportation */}
+        <form
+          onSubmit={handleSubmit}
+          className="carbon-form"
+        >
+          {/* Transportation - Always set to "Car" */}
           <div className="mb-3">
             <label className="form-label">Transportation Type:</label>
-            <select
-              name="transportation"
-              value={formData.transportation}
-              onChange={handleChange}
-              required
-              className="form-select"
-            >
-              <option value="car">Car</option>
-              <option value="bus">Bus</option>
-              <option value="train">Train</option>
-              <option value="bike">Bike</option>
-              <option value="walking">Walking</option>
-            </select>
-          </div>
+            <input
+              type="text"
+              value="Car" // Fixed value for "Car"
+              readOnly
+              className="form-control"
+            />
+          </div>  
 
-          {/* Car Type (Only shows if car is selected) */}
-          {formData.transportation === 'car' && (
+          {/* Car Type Dropdown */}
+          {formData.transportation === "car" && (
             <div className="mb-3">
               <label className="form-label">Car Fuel Type:</label>
               <select
@@ -107,60 +83,190 @@ const CarbonForm: React.FC = () => {
               >
                 <option value="electric">Electric</option>
                 <option value="hybrid">Hybrid</option>
-                <option value="petrol">Petrol</option>
-                <option value="diesel">Diesel</option>
+                <option value="gas">Gas</option>
               </select>
             </div>
           )}
 
-          {/* Diet */}
-          <div className="mb-3">
-            <label className="form-label">Food Diet:</label>
-            <select
-              name="diet"
-              value={formData.diet}
-              onChange={handleChange}
-              required
-              className="form-select"
-            >
-              <option value="meat_every_meal">Meat in every meal 🍖</option>
-              <option value="vegetarian">Vegetarian 🥗</option>
-              <option value="vegan">Vegan 🌱</option>
-            </select>
-          </div>
+          {/* Distance */}
+          {formData.transportation === "car" && (
+            <div className="mb-3">
+              <label className="form-label">Distance Driven (km):</label>
+              <input
+                type="number"
+                name="distance"
+                value={formData.distance}
+                onChange={handleChange}
+                required
+                className="form-control"
+              />
+            </div>
+          )}
 
-          {/* Water Usage */}
-          <div className="mb-3">
-            <label className="form-label">Water Usage (% of Average):</label>
-            <input
-              type="range"
-              name="waterUsage"
-              min="0"
-              max="100"
-              value={formData.waterUsage}
-              onChange={handleChange}
-              className="form-range"
-            />
-            <span className="d-block text-center mt-2">{formData.waterUsage}%</span>
-          </div>
-
-          {/* Submit Button and Cancel Button */}
+          {/* Submit & Cancel */}
           <div className="d-flex justify-content-between">
-            <button type="submit" id="log-entry" className="btn btn-success">
-              Log Entry
-            </button>
-            <button
-              type="button"
-              onClick={handleCancel}
-              className="btn btn-danger"
-            >
-              Cancel
-            </button>
+            <button type="submit" className="btn btn-success">Calculate Impact</button>
+            <button type="button" onClick={() => setShowForm(false)} className="btn btn-danger">Cancel</button>
           </div>
+
+          {/* Error Message */}
+          {error && <div className="alert alert-danger mt-3">{error}</div>}
         </form>
+      )}
+
+      {/* Display CO₂ Impact */}
+      {carbonResults.length > 0 && (
+        <div className="mt-4">
+          <h4>Carbon Impact</h4>
+          <ul className="list-group">
+            {carbonResults.map((result, index) => (
+              <li key={index} className="list-group-item">
+                {result.activity}: {result.co2e} {result.unit} CO₂
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );
 };
 
 export default CarbonForm;
+
+/*import React, { useState } from "react";
+import "../index.css"; // Import your CSS file for styling
+
+const CarbonForm: React.FC = () => {
+  const [formData, setFormData] = useState({
+    transportation: "car",  // Always set to "Car"
+    carType: "electric",    // Default car type
+    distance: 0,
+  });
+
+  const [showForm, setShowForm] = useState(false); // Toggle form visibility
+  const [carbonResults, setCarbonResults] = useState<any[]>([]); // Store CO₂ impact
+  const [error, setError] = useState<string | null>(null); // Store errors
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  // Fake calculation for CO₂ impact
+  const simulateCarbonImpact = (data: { carType: string; distance: number }) => {
+    const fakeData = [
+      { activity: "Electric", co2e: 0.1, unit: "kg" },
+      { activity: "Hybrid", co2e: 0.15, unit: "kg" },
+      { activity: "Petrol", co2e: 0.25, unit: "kg" },
+    ];
+
+    const result = fakeData.find((item) => item.activity.toLowerCase() === data.carType);
+    const simulatedCo2e = result ? result.co2e * data.distance : 0;
+
+    return [
+      {
+        activity: result?.activity || "Unknown",
+        co2e: simulatedCo2e.toFixed(2),
+        unit: result?.unit || "kg",
+      },
+    ];
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      // Simulate CO₂ impact calculation
+      const data = simulateCarbonImpact({ carType: formData.carType, distance: Number(formData.distance) });
+      setCarbonResults(data); // Store the simulated results
+      setError(null);
+      setShowForm(false);
+    } catch (error) {
+      setError("An error occurred while calculating the carbon impact.");
+      console.error("Error:", error);
+    }
+  };
+
+  return (
+    <div className="form-container">
+      {/* Log Entry Button *//*}
+      {!showForm && (
+        <button onClick={() => setShowForm(true)} className="btn btn-success w-100">
+          Log Entry
+        </button>
+      )}
+
+      {/* Form *//*}
+      {showForm && (
+        <form onSubmit={handleSubmit} className="carbon-form">
+          {/* Transportation - Always set to "Car" *//*}
+          <div className="mb-3">
+            <label className="form-label">Transportation Type:</label>
+            <input
+              type="text"
+              value="Car" // Fixed value for "Car"
+              readOnly
+              className="form-control"
+            />
+          </div>
+
+          {/* Car Type Dropdown *//*}
+          <div className="mb-3">
+            <label className="form-label">Car Fuel Type:</label>
+            <select
+              name="carType"
+              value={formData.carType}
+              onChange={handleChange}
+              className="form-select"
+            >
+              <option value="electric">Electric</option>
+              <option value="hybrid">Hybrid</option>
+              <option value="petrol">Petrol</option>
+            </select>
+          </div>
+
+          {/* Distance *//*}
+          <div className="mb-3">
+            <label className="form-label">Distance Driven (km):</label>
+            <input
+              type="number"
+              name="distance"
+              value={formData.distance}
+              onChange={handleChange}
+              required
+              className="form-control"
+            />
+          </div>
+
+          {/* Submit & Cancel *//*}
+          <div className="d-flex justify-content-between">
+            <button type="submit" className="btn btn-success">Calculate Impact</button>
+            <button type="button" onClick={() => setShowForm(false)} className="btn btn-danger">Cancel</button>
+          </div>
+
+          {/* Error Message *//*}
+          {error && <div className="alert alert-danger mt-3">{error}</div>}
+        </form>
+      )}
+
+      {/* Display CO₂ Impact *//*}
+      {carbonResults.length > 0 && (
+        <div className="mt-4">
+          <h4>Carbon Impact</h4>
+          <ul className="list-group">
+            {carbonResults.map((result, index) => (
+              <li key={index} className="list-group-item">
+                {result.activity}: {result.co2e} {result.unit} CO₂
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default CarbonForm;
+*/
