@@ -13,9 +13,6 @@ interface UserAttributes {
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
 
 export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
-   password(password: any) {
-       throw new Error('Method not implemented.');
-   }
    public id!: number;
    public username!: string;
    public email!: string;
@@ -27,7 +24,8 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
    public readonly created_at!: Date;
 
    public async setPassword(password: string){
-
+    const saltRounds = 10;
+    this.password_hash = await bcrypt.hash(password, saltRounds);
    }
 }
 
@@ -72,7 +70,7 @@ export function UserFactory(sequelize: Sequelize): typeof User {
           },
           // Before updating a user, hash and set the new password if it has changed
           beforeUpdate: async (user: User) => {
-            if (user.changed('password')) {
+            if (user.changed('password_hash')) {
               await user.setPassword(user.password_hash);
             }
           },
