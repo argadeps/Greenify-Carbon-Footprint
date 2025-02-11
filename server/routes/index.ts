@@ -1,21 +1,21 @@
-import { Request, Response, Router} from 'express';
-//import authRoutes from './auth-routes.js';
-//import apiRoutes from './api/index.js';
-//import { authenticateToken } from '../middleware/auth.js';
+import { Router } from 'express';
+import activityRouter from './activity/index.js';
+import userRouter from './user/index.js';
+import { authenticateToken } from '../middleware/auth.js';
 
 const router = Router();
 
-router.get('/', async (_req: Request, res: Response) => {
-    try {
-      res.json({message: "working"});
-    } catch (error: any) {
-      res.status(500).json({
-        message: error.message
-      });
-    }
-  });
 
-//router.use('/auth', authRoutes);
-//router.use('/api', authenticateToken, apiRoutes);
+router.use('/activity', activityRouter);
+router.use('/user', authenticateToken, userRouter);
+/*router.get('/', async (_req: Request, res: Response) => {
+    if(_req) {
+        res.status(200).json({message: " it's working!!"})
+    }
+    else {
+        res.status(400).json({message: 'bad message'});
+    }
+  });*/
+
 
 export default router;
