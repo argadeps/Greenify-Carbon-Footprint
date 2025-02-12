@@ -1,5 +1,5 @@
 import { DataTypes, Sequelize, Model, Optional, ForeignKey } from 'sequelize';
-import { User } from './user';
+import { User } from './user.js';
 import { EmissionFactor } from './emissionFactor.js'
 
 interface ActivityAttributes {
@@ -43,7 +43,7 @@ export function ActivityFactory(sequelize: Sequelize): typeof Activity {
                 allowNull: false
             },
             display_name: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.STRING,
                 allowNull: false
             },
             type: {
@@ -84,7 +84,7 @@ export function ActivityFactory(sequelize: Sequelize): typeof Activity {
 
     Activity.belongsTo(User, {foreignKey: 'user_id'});
     User.hasMany(Activity,{foreignKey: 'user_id'});
-    Activity.belongsTo(EmissionFactor,{foreignKey: 'display_name'});
+    //Activity.belongsTo(EmissionFactor,{foreignKey: 'display_name'});
     EmissionFactor.hasMany(Activity, {foreignKey: 'display_name'})
 
     return Activity;

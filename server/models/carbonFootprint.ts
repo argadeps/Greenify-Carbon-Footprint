@@ -1,5 +1,5 @@
 import { DataTypes, Sequelize, Model, Optional, ForeignKey } from 'sequelize';
-import { User } from './user';
+import { User } from './user.js';
 
 interface CarbonFootprintAttributes {
     id: number;
