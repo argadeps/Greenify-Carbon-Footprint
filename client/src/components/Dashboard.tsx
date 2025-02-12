@@ -39,7 +39,13 @@ const Dashboard = () => {
     <div id= "greeting">
       <h1>Welcome Back, {username}!</h1>
       {/* Add any other dashboard content here */}
-    </div>
+  
+
+          {/* Footer */}
+          <footer id="footer">
+          <p>© 2025 Greenify</p>
+        </footer>
+      </div>
   );
 };
 
