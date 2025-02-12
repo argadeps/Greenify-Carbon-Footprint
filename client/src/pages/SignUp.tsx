@@ -50,8 +50,8 @@ function SignUp() {
           login(data.userData, data.token); // Pass the received token to the login function from AuthContext
         }
 
-        // Redirect to Home page after successful sign up
-        navigate('/home');
+        // Redirect to Login page after successful sign up
+        navigate('/login');
       } else {
         setError(data.message || 'Failed to sign up. Please try again.');
       }

@@ -1,0 +1,10 @@
+/* interface CarbonData {
+    location: string;
+    electricity: number;
+    transportation: string;
+    carType?: string;
+    diet: string;
+    waterUsage: number;
+}
+  export default CarbonData; // This is a default export */
+  

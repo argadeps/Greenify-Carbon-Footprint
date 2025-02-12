@@ -1,3 +1,8 @@
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
+
 type ActivityType = "electric" | "hybrid" | "gas"; // Only car types
 
 const ACTIVITY_IDS: Record<ActivityType, string> = {
@@ -35,7 +40,7 @@ export const calculateCarbonImpact = async (data: CarbonFormData) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer your_api_key_here`, // Replace with real API key
+        Authorization: `Bearer ${process.env.CLIMATIQ_API_KEY}`, // Use API key from .env
       },
       body: JSON.stringify({ estimations: payload }),
     });
