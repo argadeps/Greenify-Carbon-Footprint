@@ -6,10 +6,7 @@ CREATE TABLE Users (
   id SERIAL PRIMARY KEY,
   username VARCHAR(255) NOT NULL UNIQUE,
   email VARCHAR(255) NOT NULL UNIQUE,
-  password_hash VARCHAR(255) NOT NULL,
-  location VARCHAR(255),
-  eco_score INTEGER DEFAULT 0,
-  last_login TIMESTAMP,
+  password VARCHAR(255) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -58,7 +55,10 @@ CREATE TABLE CarbonFootprints (
 CREATE TABLE Parameters (
    id SERIAL PRIMARY KEY,
    parameter_name VARCHAR(30) NOT NULL,
-   display_name VARCHAR(100) NOT NULL REFERENCES EmissionFactors(display_name) ON DELETE CASCADE ON UPDATE CASCADE
+   value VARCHAR(50) NOT NULL,
+   value_type VARCHAR(10) NOT NULL,
+   display_name VARCHAR(100) NOT NULL REFERENCES EmissionFactors(display_name) ON DELETE CASCADE ON UPDATE CASCADE,
+   user_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE
 )
 
 -- created indexes for columns used in joins and where clauses

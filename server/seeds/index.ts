@@ -1,5 +1,6 @@
 import { seedEmissionFactors} from './emisssion-factors-seeds.js';
 import { seedUsers } from './user-seeds.js';
+import { seedParameters } from './paramete-seeds.js';
 import sequelize from '../config/connection.js';
 
 const seedAll = async (): Promise<void> => {
@@ -12,6 +13,9 @@ const seedAll = async (): Promise<void> => {
 
     await seedEmissionFactors();
     console.log('\n----- EMISSIONFACTORS SEEDED -----\n');
+
+    await seedParameters();
+    console.log('\n----- PARAMETERS SEEDED -----\n');
     
     process.exit(0);
   } catch (error) {

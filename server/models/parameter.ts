@@ -5,8 +5,10 @@ import { User } from './user';
 interface ParameterAttributes {
     id: number;
     parameter_name: string;
+    value: string;
+    value_type: string;
     display_name: string;
-    user_id: string;
+    user_id: number;
 }
 
 interface ParameterCreationAttributes extends Optional<ParameterAttributes, 'id'> { }
@@ -14,8 +16,10 @@ interface ParameterCreationAttributes extends Optional<ParameterAttributes, 'id'
 export class Parameter extends Model<ParameterAttributes, ParameterCreationAttributes> implements ParameterAttributes {
     public id!: number;
     public parameter_name!: string;
+    value!: string;
+    value_type!: string;
     public display_name!: ForeignKey<string>;
-    public user_id!: ForeignKey<string>;
+    public user_id!: ForeignKey<number>;
 }
 
 export function ParameterFactory(sequelize: Sequelize): typeof Parameter {
@@ -30,12 +34,20 @@ export function ParameterFactory(sequelize: Sequelize): typeof Parameter {
                 type: DataTypes.STRING,
                 allowNull: false
             },
+            value: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            value_type: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
             display_name: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
             user_id: {
-                type: DataTypes.STRING,
+                type: DataTypes.INTEGER,
                 allowNull: false
             }
         },
