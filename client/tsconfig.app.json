@@ -22,5 +22,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "interfaces"]
+  "include": ["src", "interfaces","node_modules/eslint-plugin-react-hooks"]
 }

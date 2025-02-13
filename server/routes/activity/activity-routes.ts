@@ -19,7 +19,7 @@ router.get('/', async (_req: Request, res: Response) => {
   router.get('/:displayName', async (req: Request, res: Response) => {
     const { displayName } = req.params;
     try {
-      const user = await EmissionFactor.findOne({ where: { display_name: displayName }, attributes: { exclude: ['created_at'] } });
+      const user = await EmissionFactor.findOne({ where: { displayname: displayName }, attributes: { exclude: ['created_at'] } });
       if (user) {
         res.json(user);
       } else {
@@ -34,7 +34,7 @@ router.get('/', async (_req: Request, res: Response) => {
     const {activity_id, category, display_name, source, region, year, source_lca_activity, data_version} = _req.body;
     try {
       const activity = await EmissionFactor.create({
-          activity_id, category, display_name, source, region, year, source_lca_activity, data_version,
+          activity_id, category, displayname: display_name, source, region, year, source_lca_activity, data_version,
           created_at: Date.now()
       });
       res.json(activity);
