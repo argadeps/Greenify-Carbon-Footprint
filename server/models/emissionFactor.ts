@@ -4,7 +4,7 @@ interface EmissionFactorAttributes {
     id: number;
     activity_id: string;
     category: string;
-    display_name: string;
+    displayname: string;
     source: string;
     region: string;
     year: number;
@@ -19,7 +19,7 @@ export class EmissionFactor extends Model<EmissionFactorAttributes, EmissionFact
     public id!: number;
     public activity_id!: string;
     public category!: string;
-    public display_name!: string;
+    public displayname!: string;
     public source!: string;
     public region!: string;
     public year!: number;
@@ -44,7 +44,7 @@ export function EmissionFactorFactory(sequelize: Sequelize): typeof EmissionFact
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            display_name: {
+            displayname: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
