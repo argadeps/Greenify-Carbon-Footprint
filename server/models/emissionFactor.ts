@@ -46,7 +46,8 @@ export function EmissionFactorFactory(sequelize: Sequelize): typeof EmissionFact
             },
             display_name: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
+                unique: true
             },
             source: {
                 type: DataTypes.STRING,
