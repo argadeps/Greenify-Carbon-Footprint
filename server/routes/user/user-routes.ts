@@ -32,5 +32,28 @@ router.get('/', async (_req: Request, res: Response) => {
     }
   });
 
+  router.post('/users/register', async (req: Request, res: Response) => {
+    try {
+        const { username, email, password} = req.body;
+        
+        const existingUser = await User.findOne({ where: { email } });
+        if (existingUser) {
+            return res.status(400).json({ error: 'Email already registered' });
+        }
+
+        const user = await User.create({
+            username,
+            email,
+            password: password,
+                  
+              });
+
+        
+            return res.status(201).json({ message: 'User created successfully', userId: user.id });
+    } catch (error) {
+        return res.status(500).json({ error: 'Error creating user' });
+    }
+});
+
   export { router as userRouter };
   
