@@ -1,6 +1,6 @@
 import { seedEmissionFactors} from './emisssion-factors-seeds.js';
 import { seedUsers } from './user-seeds.js';
-import { seedParameters } from './paramete-seeds.js';
+import { seedParameters } from './parameter-seeds.js';
 import sequelize from '../config/connection.js';
 
 const seedAll = async (): Promise<void> => {
