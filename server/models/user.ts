@@ -5,9 +5,7 @@ interface UserAttributes {
     id: number;
     username: string;
     email: string;
-    password_hash: string;
-    location: string;
-    eco_score: number;
+    password: string;
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
@@ -16,16 +14,14 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
    public id!: number;
    public username!: string;
    public email!: string;
-   public password_hash!: string;
-   public location!: string;
-   public eco_score!: number;
+   public password!: string;
 
    public readonly last_login!: Date;
    public readonly created_at!: Date;
 
    public async setPassword(password: string){
     const saltRounds = 10;
-    this.password_hash = await bcrypt.hash(password, saltRounds);
+    this.password = await bcrypt.hash(password, saltRounds);
    }
 }
 
@@ -45,17 +41,9 @@ export function UserFactory(sequelize: Sequelize): typeof User {
               type: DataTypes.STRING,
               allowNull: false,
           },
-          password_hash: {
+          password: {
               type: DataTypes.STRING,
               allowNull: false,
-          },
-          location: {
-            type: DataTypes.STRING,
-            allowNull: false,
-          },
-          eco_score: {
-            type: DataTypes.NUMBER,
-            allowNull: false
           }
 
       },
@@ -66,12 +54,12 @@ export function UserFactory(sequelize: Sequelize): typeof User {
         hooks: {
           // Before creating a new user, hash and set the password
           beforeCreate: async (user: User) => {
-            await user.setPassword(user.password_hash);
+            await user.setPassword(user.password);
           },
           // Before updating a user, hash and set the new password if it has changed
           beforeUpdate: async (user: User) => {
-            if (user.changed('password_hash')) {
-              await user.setPassword(user.password_hash);
+            if (user.changed('password')) {
+              await user.setPassword(user.password);
             }
           },
         }

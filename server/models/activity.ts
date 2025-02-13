@@ -1,6 +1,6 @@
 import { DataTypes, Sequelize, Model, Optional, ForeignKey } from 'sequelize';
 import { User } from './user.js';
-import { EmissionFactor } from './emissionFactor.js'
+//import { EmissionFactor } from './emissionFactor.js'
 
 interface ActivityAttributes {
     id: number;
@@ -83,9 +83,10 @@ export function ActivityFactory(sequelize: Sequelize): typeof Activity {
     );
 
     Activity.belongsTo(User, {foreignKey: 'user_id'});
-    User.hasMany(Activity,{foreignKey: 'user_id'});
-    Activity.belongsTo(EmissionFactor,{foreignKey: 'display_name'});
-    EmissionFactor.hasMany(Activity, {foreignKey: 'display_name'})
+    User.hasMany(Activity,{foreignKey: 'user_id', as: 'userActivities', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
+
+    /*Activity.belongsTo(EmissionFactor,{foreignKey: 'display_name'});
+    EmissionFactor.hasMany(Activity, {foreignKey: 'display_name', as: 'emissionActivities', onDelete: 'CASCADE', onUpdate: 'CASCADE'})*/
 
     return Activity;
 }
