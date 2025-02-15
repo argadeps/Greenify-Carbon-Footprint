@@ -1,5 +1,5 @@
 import { DataTypes, Sequelize, Model, Optional, ForeignKey } from 'sequelize';
-import { EmissionFactor } from './emissionFactor.js';
+//import { EmissionFactor } from './emissionFactor.js';
 //import { User } from './user.js';
 
 interface ParameterAttributes {
@@ -58,8 +58,8 @@ export function ParameterFactory(sequelize: Sequelize): typeof Parameter {
         }
     );
 
-    Parameter.belongsTo(EmissionFactor, {foreignKey: 'display_name'});
-    EmissionFactor.hasMany(Parameter, {foreignKey: 'display_name', as: 'emissionParameters', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
+    /*Parameter.belongsTo(EmissionFactor, {foreignKey: 'display_name'});
+    EmissionFactor.hasMany(Parameter, {foreignKey: 'display_name', as: 'emissionParameters', onDelete: 'CASCADE', onUpdate: 'CASCADE'});*/
 
     /*Parameter.belongsTo(User, {foreignKey: 'user_id'});
     User.hasMany(Parameter, {foreignKey: 'user_id', as: 'userParameters', onDelete: 'CASCADE', onUpdate: 'CASCADE'});*/
