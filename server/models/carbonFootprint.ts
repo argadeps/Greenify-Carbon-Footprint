@@ -12,7 +12,7 @@ interface CarbonFootprintAttributes {
     consumer_goods: number;
     services: number;
     date: Date;
-    created_at: number;
+    created_at: Date;
 }
 
 interface CarbonFootprintCreationAttributes extends Optional<CarbonFootprintAttributes, 'id'> { }
@@ -28,7 +28,7 @@ export class CarbonFootprint extends Model<CarbonFootprintAttributes, CarbonFoot
     public consumer_goods!: number;
     public services!: number;
     public date!: Date;
-    public created_at!: number;
+    public created_at!: Date;
 }
 
 export function CarbonFootprintFactory(sequelize: Sequelize): typeof CarbonFootprint {
@@ -76,7 +76,7 @@ export function CarbonFootprintFactory(sequelize: Sequelize): typeof CarbonFootp
                 allowNull: false
             },
             created_at: {
-                type: DataTypes.TIME,
+                type: DataTypes.DATE,
                 allowNull: false,
                 defaultValue: Sequelize.fn('now')
             }

@@ -10,7 +10,7 @@ interface EmissionFactorAttributes {
     year: number;
     source_lca_activity: string;
     data_version: string;
-    created_at: number;
+    created_at: Date;
 }
 
 interface EmissionFactorCreationAttributes extends Optional<EmissionFactorAttributes, 'id'> { }
@@ -25,7 +25,7 @@ export class EmissionFactor extends Model<EmissionFactorAttributes, EmissionFact
     public year!: number;
     public source_lca_activity!: string;
     public data_version!: string;
-    public created_at!: number;
+    public created_at!: Date;
 }
 
 export function EmissionFactorFactory(sequelize: Sequelize): typeof EmissionFactor {
@@ -69,7 +69,7 @@ export function EmissionFactorFactory(sequelize: Sequelize): typeof EmissionFact
                 allowNull: false
             },
             created_at: {
-                type: DataTypes.TIME,
+                type: DataTypes.DATE,
                 allowNull: false,
                 defaultValue: Sequelize.fn('now')
             }
