@@ -2,6 +2,7 @@ import React, { useState } from "react";
 // Import the calculateCarbonImpact function and CarbonFormData from your API file
 // import { calculateCarbonImpact, CarbonFormData } from "./api/carbonApi";
 import '../index.css'; 
+import { calculateCarbonImpact, CarbonFormData } from "../services/carbonApi.js";
 const CarbonForm: React.FC = () => {
   const [formData, setFormData] = useState({
     transportation: "car",
@@ -10,7 +11,7 @@ const CarbonForm: React.FC = () => {
   });
 
   const [showForm, setShowForm] = useState(false); // Toggle form visibility
-  const [carbonResults, setCarbonResults] = useState<any[]>([]); // Store CO₂ impact
+  const [carbonResults, setCarbonResults] = useState<any>({}); // Store CO₂ impact
   const [error, setError] = useState<string | null>(null); // Store errors
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -119,7 +120,7 @@ const CarbonForm: React.FC = () => {
         <div className="mt-4">
           <h4>Carbon Impact</h4>
           <ul className="list-group">
-            {carbonResults.map((result, index) => (
+            {carbonResults.map((result: { activity: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; co2e: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; unit: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }, index: React.Key | null | undefined) => (
               <li key={index} className="list-group-item">
                 {result.activity}: {result.co2e} {result.unit} CO₂
               </li>
