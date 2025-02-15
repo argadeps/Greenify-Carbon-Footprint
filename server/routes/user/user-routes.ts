@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', async (_req: Request, res: Response) => {
     try {
       const users = await User.findAll({
-        attributes: { exclude: ['password_hash'] }
+        attributes: { exclude: ['password'] }
       });
       res.json(users);
     } catch (error: any) {
@@ -20,7 +20,7 @@ router.get('/', async (_req: Request, res: Response) => {
     const { id } = req.params;
     try {
       const user = await User.findByPk(id, {
-        attributes: { exclude: ['password_hash'] }
+        attributes: { exclude: ['password'] }
       });
       if (user) {
         res.json(user);
