@@ -35,7 +35,7 @@ router.get('/', async (_req: Request, res: Response) => {
     try {
       const activity = await EmissionFactor.create({
           activity_id, category, display_name: display_name, source, region, year, source_lca_activity, data_version,
-          created_at: Date.now()
+          created_at: new Date()
       });
       res.json(activity);
     } catch (error: any) {
